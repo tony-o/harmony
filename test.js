@@ -3,7 +3,7 @@ var http = require("http");
 
 var s = new harmony.server({persistent:false});
 
-var c1 = new harmony.client({balance:500,listenport:1080});
+var c1 = new harmony.client({balance:1000,listenport:1080});
 var c2 = new harmony.client({balance:500,listenport:1090});
 
 var s1 = http.createServer(function(q,s){
