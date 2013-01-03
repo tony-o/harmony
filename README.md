@@ -57,7 +57,7 @@ There are a lot more options than what is shown here, they're discussed below.
 
 The server expects load balancing servers to acknowledge their availability and to report in once in a while.  If the load target fails to ack within a certain established period then the server gives up on it and excludes it from it's pool of available targets until the target acknowledges.
 
-It is the client's responsibility to report in to the server and provide port information on where it expects the server to pipe it's potential clients to.  So while the server listens on port 3000, it may be proxying connections to ```server1:5000 , server1:5005 , server2:5000```.
+It is the target's responsibility to report in to the server and provide port information on where it expects the server to pipe it's potential [external] clients to.  So while the server listens on port 3000, it may be proxying connections to ```server1:5000 , server1:5005 , server2:5000```.
 
 ####Options
 
