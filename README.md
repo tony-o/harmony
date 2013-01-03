@@ -7,7 +7,7 @@ This module is meant to grow encompass many different techniques and be suitable
 ##Example
 
 ```javascript
-var harmony = require("harmony"); //awww, harmony
+var harmony = require("node-harmony"); //awww, harmony
 
 var http = require("http"); //only for this example
 
@@ -50,7 +50,7 @@ There are a lot more options than what is shown here, they're discussed below.
 
 ##Download
 ```
-> npm install harmony 
+> npm install node-harmony 
 ```
 
 ##Docs
@@ -58,7 +58,7 @@ There are a lot more options than what is shown here, they're discussed below.
 ###Server
 
 ```
-var harmony = require("harmony");
+var harmony = require("node-harmony");
 var balancer = harmony.server(options);
 ```
 
@@ -114,7 +114,7 @@ The time in minutes which a target load bearing server is considered 'not availa
 ###Load Bearing Targets (Internal Clients)
 
 ```
-var harmony = require("harmony");
+var harmony = require("node-harmony");
 var reporter = harmony.client(options);
 ```
 
