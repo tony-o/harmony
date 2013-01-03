@@ -2,6 +2,8 @@
 
 Harmony is a /smart/ balancing module for nodejs (or any type of TCP server cluster).  It's more than just a basic round robin balancer and is capable of persistent connections, detecting timeouts in servers, requeuing connections, and weighted balancing.
 
+This module is meant to grow encompass many different techniques and be suitable for /most/ applications.  If you have ideas or something isn't working properly then please submit a bug report.
+
 ##Example
 
 ```javascript
@@ -128,4 +130,30 @@ The options are passed in via JSON Object and the following options are availabl
 #####Host (host)
 Default: ```localhost```
 
+This is the host your balancer is running on, it may or not be the same machine.
+
+#####Administration Port (adminport)
+Default: ```1666```
+
+This is the port your balancer is listening on.
+
+#####Listening Port (listenport)
+Default: ```80```
+
+This is the port your load bearing server is listening on.  This is the port your balancing server will try to proxy connections with.
+
+#####Balance (balance)
+Default: ```500```
+
+This is an arbitrary number used to weight the target.  The higher the number the higher the precedence on using that server.
+
+IE:
+ * LBServer1 weights 500 and will handle 25% of requests
+ * LBServer2 weights 500 and will handle 25% 
+ * LBServer3 weights 1000 and will handle 50% (if you're not receiving connections faster than LBServer3 can close them then LBServer3 will handle 100% of requests)
+
+#####Acknowledge Time (ack)
+Default: ```300,000```
+
+This is a rough time that the load target will attempt to check in and acknowledge it's still alive.  Setting this to half or less of what the server expects would be ideal.
 
