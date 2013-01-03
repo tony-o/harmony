@@ -59,60 +59,44 @@ There are a lot more options than what is shown here, they're discussed below.
 
 The options are passed in via JSON Object and the following options are available:
 #####Administration Port (adminport)
-Default:
-```
-1666
-```
+Default: ```1666```
+
 This is the port the load balancer listens on for possible load bearing targets to balance traffic with.  This port is simply for administration and not for serving any content.
 
 #####Listen Port (listenport)
-Default:
-```
-3000
-```
+Default: ```3000```
+
 The port the server listens on for client connections to connect with the potential load bearing servers.
 
 #####Persistent Connections (persistent)
-Default:
-```
-{ } 
-```
+Default: ```{ } ```
+
 By default, the balancer will try to persist connections, if you don't need it or care about it, passing in a value of 'false' will ignore persistence.
 
 #####Host (host)
-Default:
-```
-localhost
-```
+Default: ```localhost```
+
 This is the host the server will attempt to listen on.
 
 #####Concurrency (concurrency)
-Default:
-```
--1
-```
+Default: ```-1```
+
 Setting the concurrency will limit the load balancer to X number of open connections at a time.  Certain protocols choke on the way this blocks, including HTTP.  Setting this number to 0 or more will cause the server to only allow X number of connections at a time - 0 being paused and 1 or more allowing that number.
 
 #####Requeue (requeue)
-Default:
-```
-1
-```
+Default: ```1```
+
 If the connection fails or something bad happens, the server will requeue the connection X number of times prior to displaying the 'unavailable' message described next.
 
 #####Unavailable (unavailable)
-Default:
-```
-null
-```
+Default: ```null```
+
 This option can take two separate items, a 'function' or a string.  
 If this option contains a string then the server will write out the string to client socket and then close the socket.
-If the option is a function, it will call the function with parameters ```error,socket)```.
+If the option is a function, it will call the function with parameters ```error, socket```.
 
 #####Host Timeout (hostTimeout)
-Default:
-```
-1
-```
+Default: ```1```
+
 The time in minutes which a target load bearing server is considered 'not available' 
 
