@@ -1,10 +1,9 @@
-HARMONY.js
----
+#HARMONY.js
 
 Harmony is a /smart/ balancing module for nodejs (or any type of TCP server cluster).  It's more than just a basic round robin balancer and is capable of persistent connections, detecting timeouts in servers, requeuing connections, and weighted balancing.
 
-Example
----
+##Example
+
 ```javascript
 var harmony = require("harmony"); //awww, harmony
 
@@ -47,14 +46,12 @@ s2.listen(1090);
 
 There are a lot more options than what is shown here, they're discussed below.
 
-Download
----
+##Download
 ```
 > npm install async
 ```
 
-Docs
----
+##Docs
 
-Server
-------
+###Server
+server stuff
