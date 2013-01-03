@@ -48,12 +48,17 @@ There are a lot more options than what is shown here, they're discussed below.
 
 ##Download
 ```
-> npm install async
+> npm install harmony 
 ```
 
 ##Docs
 
 ###Server
+
+```
+var harmony = require("harmony");
+var balancer = harmony.server(options);
+```
 
 The server expects load balancing servers to acknowledge their availability and to report in once in a while.  If the load target fails to ack within a certain established period then the server gives up on it and excludes it from it's pool of available targets until the target acknowledges.
 
@@ -103,4 +108,24 @@ If the option is a function, it will call the function with parameters ```error,
 Default: ```1```
 
 The time in minutes which a target load bearing server is considered 'not available' 
+
+###Load Bearing Targets (Internal Clients)
+
+```
+var harmony = require("harmony");
+var reporter = harmony.client(options);
+```
+
+The server expects load balancing servers to acknowledge their availability and to report in once in a while.  If the load target fails to ack within a certain established period then the server gives up on it and excludes it from it's pool of available targets until the target acknowledges.
+
+It is the target's responsibility to report in to the server and provide port information on where it expects the server to pipe it's potential [external] clients to.  So while the server listens on port 3000, it may be proxying connections to ```server1:5000 , server1:5005 , server2:5000```.  
+
+The load targets can be added and removed as desired and the load balancer should gracefully handle those adds/removes without any hiccups with the exception of persistent connections.
+
+####Options
+
+The options are passed in via JSON Object and the following options are available:
+#####Host (host)
+Default: ```localhost```
+
 
