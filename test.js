@@ -11,6 +11,10 @@ var c2 = new harmony.client({balance:500,listenport:1090,ack:60*1000});
 var s1 = http.createServer(function(q,s){
   s.end("served from port 1080");
   c1.close();
+  /*
+    server will only use s2;
+  */
+
 });
 s1.listen(1080);
 
