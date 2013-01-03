@@ -55,6 +55,10 @@ There are a lot more options than what is shown here, they're discussed below.
 
 ###Server
 
+The server expects load balancing servers to acknowledge their availability and to report in once in a while.  If the load target fails to ack within a certain established period then the server gives up on it and excludes it from it's pool of available targets until the target acknowledges.
+
+It is the client's responsibility to report in to the server and provide port information on where it expects the server to pipe it's potential clients to.  So while the server listens on port 3000, it may be proxying connections to ```server1:5000 , server1:5005 , server2:5000```.
+
 ####Options
 
 The options are passed in via JSON Object and the following options are available:
@@ -71,7 +75,7 @@ The port the server listens on for client connections to connect with the potent
 #####Persistent Connections (persistent)
 Default: ```{ } ```
 
-By default, the balancer will try to persist connections, if you don't need it or care about it, passing in a value of 'false' will ignore persistence.
+By default, the balancer will try to persist connections, if you don't need it or care about it, passing in a value of ```false``` will ignore persistence.
 
 #####Host (host)
 Default: ```localhost```
