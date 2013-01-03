@@ -46,3 +46,15 @@ s2.listen(1090);
 ```
 
 There are a lot more options than what is shown here, they're discussed below.
+
+Download
+---
+```
+> npm install async
+```
+
+Docs
+---
+
+Server
+------
