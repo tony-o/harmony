@@ -62,7 +62,7 @@ var s = new harmony.server({
 ```
 
 ###Client Server #1 @ host1.mydomain
-
+This code runs on host1.mydomain, not on the balancer
 ```javascript
 var harmony = require("node-harmony");
 
@@ -83,6 +83,7 @@ s1.listen(1080);
 ```
 
 ###Client Server #2 @ host2.mydomain
+This code runs on host2.mydomain, not on the balancer
 ```javascript
 var harmony = require("node-harmony");
 
