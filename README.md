@@ -4,7 +4,7 @@ Harmony is a /smart/ balancing module for nodejs (or any type of TCP server clus
 
 This module is meant to grow encompass many different techniques and be suitable for /most/ applications.  If you have ideas or something isn't working properly then please submit a bug report.
 
-##Example
+##Single Server Example (All clients are on one server with the balancer)
 
 ```javascript
 var harmony = require("node-harmony"); //awww, harmony
@@ -44,6 +44,62 @@ var s2 = http.createServer(function(q,s){
 });
 
 s2.listen(1090);
+```
+
+##Multiple Server Example (Clients are on different machines from the balancer)
+In this example you have a balancer (balance.mydomain) and two servers you want to balance between (host#.mydomain).  On both servers you want to balance between you can connect them with the method below, even if your servers aren't written in node.js.  If your servers aren't written in node.js, EG you want to balance apache, then set the 'localport' option of the client to be whatever port apache is listening on. 
+
+###Balancing server @ balance.mydomain
+```javascript
+var harmony = require("node-harmony"); //awww, harmony
+
+var s = new harmony.server({
+  persistent:false // I don't care if connections *ALWAYS* go to the same server
+  ,unavailable:function(e,c){
+    c.write("Unavailable, holmes."); // If my connection attempt times out then I'll call this function
+  }
+});
+```
+
+###Client Server #1 @ host1.mydomain
+
+```javascript
+var harmony = require("node-harmony");
+
+var c1 = new harmony.client({
+  balance:1000             // I'm big at 1000 weight
+  ,listenport:1080         // My server is on port 1080 - I run alongside Express and other sugar
+  ,ack:60*1000             // I want to send an "I'm alive" message every minute
+  ,host:"balance.mydomain" // Hostname of the balancer 
+});
+
+/* If you already have a server running and just want to use the balancer then you don't need the code below, just set the listenport above to be whatever port your server is running on */
+var http = require("http");
+var s1 = http.createServer(function(q,s){
+  s.end("served from port 1080, server 1");
+  c1.close();
+});
+s1.listen(1080);
+```
+
+###Client Server #2 @ host2.mydomain
+```javascript
+var harmony = require("node-harmony");
+
+var c2 = new harmony.client({
+  balance:500 // I'm average at 500 weight
+  ,listenport:1080
+  ,ack:60*1000
+  ,host:"balance.mydomain"
+});
+
+/* If you already have a server running and just want to use the balancer then you don't need the code below, just set the listenport above to be whatever port your server is running on */
+var http = require("http");
+var s2 = http.createServer(function(q,s){
+  s.end("served from port 1080, server 2");
+  c2.close();
+});
+s2.listen(1080);
 ```
 
 There are a lot more options than what is shown here, they're discussed below.
