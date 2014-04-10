@@ -1,0 +1,14 @@
+{
+  "name" : "node-harmony",
+  "version" : "1.0.0",
+  "description" : "Harmony is a /smart/ balancing module for nodejs (or any type of TCP server cluster). It's more than just a basic round robin balancer and is capable of persistent connections, detecting timeouts in servers, requeuing connections, and weighted balancing. This module is meant to grow encompass many different techniques and be suitable for /most/ applications. If you have ideas or something isn't working properly then please submit a bug report.",
+  "license" : "artistic",
+  "author" : "Tony O'Dell",
+  "repository" : {
+    "type" : "git",
+    "url" : "git@github.com:tony-o/harmony.git"
+  },
+  "dependencies" : {
+    "skoconc": "*"
+  }
+}
